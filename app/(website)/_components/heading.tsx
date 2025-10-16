@@ -11,7 +11,7 @@ export const Heading = () => {
                 <span className="underline">Trojan </span>
             </h1>
             <h3 className="text-base sm:text-xl md:text-2xl font-medium">
-                Trojan Experience is a connected and integrated workspace for developers.
+                Trojan is a connected and integrated workspace for developers.
             </h3>
             <Button>
                 Get Started <ArrowRight className="h-4 w-4 ml-2" />
