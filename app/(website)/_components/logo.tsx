@@ -12,7 +12,8 @@ const font = Poppins({
 export const Logo = () => {
     return (
         <div className="hidden md:flex items-center gap-x-2" >
-            <Image src="/logo-light.png" alt="Logo" width={34} height={34} />
+            <Image className="dark:hidden" src="/logo-light.png" alt="Logo" width={34} height={34} />
+            <Image className="hidden dark:block" src="/logo-dark.png" alt="Logo" width={34} height={34} />
             <p className={cn("font-semibold", font.className)}>
                 Trojan
             </p>
