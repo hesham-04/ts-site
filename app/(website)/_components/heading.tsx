@@ -23,7 +23,7 @@ export const Heading = () => {
             </h3>
             { isLoading && (
                 <div className='w-full flex items-center justify-center'>
-                    <Spinner />
+                    <Spinner size='lg'/>
                 </div>
             )}
             {isAuthenticated && !isLoading && (
