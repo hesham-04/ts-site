@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/app/(main)/_components/navigation.tsx">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/app/(main)/_components/navigation.tsx" />
+              <option name="originalContent" value="'use client';&#10;&#10;import {ChevronsLeft} from &quot;lucide-react&quot;;&#10;&#10;export  const Navigation = () =&gt; {&#10;    return (&#10;        &lt;&gt;&#10;            &lt;aside&#10;                className=&quot;group/sidebar h-full bg-secondary overflow-y-auto&#10;                relative flex w-60 flex-col z-[99999]&quot;&gt;&#10;&#10;                &lt;div&gt;&#10;                    &lt;p&gt;Action&lt;/p&gt;&#10;                &lt;/div&gt;&#10;                &lt;div className=&quot;mt-4&quot;&gt;&#10;                    &lt;p&gt;Documents&lt;/p&gt;&#10;                &lt;/div&gt;&#10;                &lt;div className=&quot;opacity-0 group-hover/sidebar:opacity-100&#10;                transition cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0&quot;/&gt;&#10;                &lt;div role='button' className='h-6 w-6 text-muted-foreground rounded-sm&#10;                hover:bg-neutral-300 dark:hover:bg-neutral-600 absolute&#10;                top-3 right-0 transition flex justify-end cursor-pointer z-20'&gt;&#10;                    &lt;ChevronsLeft className='h-6 w-6 pr-2'/&gt;&#10;                &lt;/div&gt;&#10;            &lt;/aside&gt;&#10;        &lt;/&gt;&#10;    );&#10;}" />
+              <option name="updatedContent" value="'use client';&#10;&#10;import {ChevronsLeft} from &quot;lucide-react&quot;;&#10;&#10;export  const Navigation = () =&gt; {&#10;    return (&#10;        &lt;&gt;&#10;            &lt;aside&#10;                className=&quot;group/sidebar h-full bg-secondary overflow-y-auto&#10;                relative flex w-60 flex-col z-[99999]&quot;&gt;&#10;&#10;                &lt;div&gt;&#10;                    &lt;p&gt;Action&lt;/p&gt;&#10;                &lt;/div&gt;&#10;                &lt;div className=&quot;mt-4&quot;&gt;&#10;                    &lt;p&gt;Documents&lt;/p&gt;&#10;                &lt;/div&gt;&#10;                &lt;div className=&quot;opacity-0 group-hover/sidebar:opacity-100&#10;                transition cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0&quot;/&gt;&#10;                &lt;div role='button' className='h-6 w-6 text-muted-foreground rounded-sm&#10;                group-hover/sidebar:bg-neutral-300 dark:group-hover/sidebar:bg-neutral-600 absolute&#10;                top-3 right-2 opacity-0 group-hover/sidebar:opacity-100&#10;                transition flex justify-end cursor-pointer'&gt;&#10;                    &lt;ChevronsLeft className='h-6 w-6'/&gt;&#10;                &lt;/div&gt;&#10;            &lt;/aside&gt;&#10;        &lt;/&gt;&#10;    );&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
