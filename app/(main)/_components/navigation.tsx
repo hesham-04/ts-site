@@ -7,65 +7,65 @@ import {cn} from "@/lib/utils";
 import {usePathname} from "next/navigation";
 
 export const Navigation = () => {
-  const pathname = usePathname();
-  const isMobile = useMediaQuery('(max-width: 768px)');
+    const pathname = usePathname();
+    const isMobile = useMediaQuery('(max-width: 768px)');
 
-  const isResizingRef = useRef(false);
-  const sidebarRef = useRef< ElementRef<'aside'>>(null);
-  const navbarRef = useRef<ElementRef<'div'>>(null);
-  const [isResetting, setIsResetting] = useState(false);
-  const [isCollapsed, setIsCollapsed] = useState(isMobile);
+    const isResizingRef = useRef(false);
+    const sidebarRef = useRef< ElementRef<'aside'>>(null);
+    const navbarRef = useRef<ElementRef<'div'>>(null);
+    const [isResetting, setIsResetting] = useState(false);
+    const [isCollapsed, setIsCollapsed] = useState(isMobile);
 
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      e.preventDefault()
-      e.stopPropagation()
+    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        e.preventDefault()
+        e.stopPropagation()
 
-      isResizingRef.current = true;
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
-  }
+        isResizingRef.current = true;
+        document.addEventListener("mousemove", handleMouseMove);
+        document.addEventListener("mouseup", handleMouseUp);
+    }
 
-  const handleMouseMove = (event: MouseEvent) => {
-      if (!isResizingRef.current) return;
-      let newWidth = event.clientX;
+    const handleMouseMove = (event: MouseEvent) => {
+        if (!isResizingRef.current) return;
+        let newWidth = event.clientX;
 
-      if (newWidth < 250) newWidth = 240;
-      if (newWidth > 600) newWidth = 600;
+        if (newWidth < 250) newWidth = 250;
+        if (newWidth > 600) newWidth = 600;
 
         if (sidebarRef.current && navbarRef.current) {
             sidebarRef.current.style.width = `${newWidth}px`;
             navbarRef.current.style.setProperty("left", `${newWidth}px`);
             navbarRef.current.style.setProperty("width", `calc(100% - ${newWidth}px)`);
         }
-  }
+    }
 
-  const handleMouseUp = () => {
-      isResizingRef.current = false;
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
-  }
+    const handleMouseUp = () => {
+        isResizingRef.current = false;
+        document.removeEventListener("mousemove", handleMouseMove);
+        document.removeEventListener("mouseup", handleMouseUp);
+    }
 
-  return (
-      <>
+return (
+    <>
         <aside ref={sidebarRef} className={cn("group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col z-[99999] pointer-events-auto", isResetting && "transition-all duration-300 ease-in-out", isMobile && "w-0 pointer-events-none")}>
-          <div role="button" className={cn("absolute top-3 right-2 h-6 w-6 text-muted-foreground rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-700 opacity-0 group-hover/sidebar:opacity-100 transition", isMobile && "opacity-100")}>
-              <ChevronsLeft className="h-6 w-6" /> {isMobile}
-          </div>
-          <div>
-            <p>Action Items</p>
-          </div>
-          <div className="mt-4">
-            <p>Documents</p>
-          </div>
-          <div onMouseDown={handleMouseDown} onClick={() => {}} className="opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0" />
+            <div role="button" className={cn("absolute top-3 right-2 h-6 w-6 text-muted-foreground rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-700 opacity-0 group-hover/sidebar:opacity-100 transition", isMobile && "opacity-100")}>
+                  <ChevronsLeft className="h-6 w-6" /> {isMobile}
+            </div>
+            <div>
+                <p>Action Items</p>
+            </div>
+            <div className="mt-4">
+                <p>Documents</p>
+            </div>
+            <div onMouseDown={handleMouseDown} onClick={() => {}} className="opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0" />
         </aside>
-         <div ref={navbarRef} className={cn("absolute top-0 z-[99999] left-60 w-[calc(100%-240px)]", isResetting && "transition-all duration-300 ease-in-out", isMobile && "left-0 w-full")}>
-             <nav className="bg-transparent px-3 py-2 w-full">
-                 {isCollapsed && <MenuIcon role='button' className='h-6 2-6 text-muted-foreground' />}
-             </nav>
 
-         </div>
-  </>
+    <div ref={navbarRef} className={cn("absolute top-0 z-[99999] left-60 w-[calc(100%-240px)]", isResetting && "transition-all duration-300 ease-in-out", isMobile && "left-0 w-full")}>
+        <nav className="bg-transparent px-3 py-2 w-full">
+            {isCollapsed && <MenuIcon role='button' className='h-6 2-6 text-muted-foreground' />}
+        </nav>
+    </div>
+    </>
 
   );
 };
