@@ -1,7 +1,7 @@
 'use client';
 
 import {ChevronsLeft, MenuIcon} from "lucide-react";
-import React, {ElementRef, useRef, useState} from "react";
+import React, {ElementRef, useEffect, useRef, useState} from "react";
 import {useMediaQuery} from "usehooks-ts";
 import {cn} from "@/lib/utils";
 import {usePathname} from "next/navigation";
@@ -16,9 +16,23 @@ export const Navigation = () => {
     const [isResetting, setIsResetting] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(isMobile);
 
+    useEffect(() => {
+        if (isMobile) {
+            collapse();
+        } else {
+            restWidth();
+        }
+    }, [isMobile]);
+
+    useEffect(() => {
+        if (isMobile) {
+            collapse();
+        }
+    }, [pathname, isMobile]);
+
     const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        e.preventDefault()
-        e.stopPropagation()
+        e.preventDefault();
+        e.stopPropagation();
 
         isResizingRef.current = true;
         document.addEventListener("mousemove", handleMouseMove);
