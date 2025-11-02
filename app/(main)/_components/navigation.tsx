@@ -5,6 +5,7 @@ import React, {ElementRef, useEffect, useRef, useState} from "react";
 import {useMediaQuery} from "usehooks-ts";
 import {cn} from "@/lib/utils";
 import {usePathname} from "next/navigation";
+import {UserItem} from './user-item';
 
 export const Navigation = () => {
     const pathname = usePathname();
@@ -88,12 +89,14 @@ export const Navigation = () => {
 return (
     <>
         <aside ref={sidebarRef} className={cn("group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col z-[99999] pointer-events-auto", isResetting && "transition-all duration-300 ease-in-out", isMobile && "w-0 pointer-events-none")}>
-            <div onClick={collapse} role="button" className={cn("absolute top-3 right-2 h-6 w-6 text-muted-foreground rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-700 opacity-0 group-hover/sidebar:opacity-100 transition", isMobile && "opacity-100")}>
+            <div onClick={collapse} role="button" className={cn("absolute top-2 right-2 h-6 w-6 text-muted-foreground rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-700 opacity-0 group-hover/sidebar:opacity-100 transition", isMobile && "opacity-100")}>
                   <ChevronsLeft className="h-6 w-6" /> {isMobile}
             </div>
+
             <div>
-                <p>Action Items</p>
+                <UserItem />
             </div>
+
             <div className="mt-4">
                 <p>Documents</p>
             </div>
