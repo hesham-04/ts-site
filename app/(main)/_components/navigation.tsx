@@ -1,15 +1,22 @@
 'use client';
 
-import {ChevronsLeft, MenuIcon} from "lucide-react";
+import {ChevronsLeft, MenuIcon, PlusCircle} from "lucide-react";
 import React, {ElementRef, useEffect, useRef, useState} from "react";
 import {useMediaQuery} from "usehooks-ts";
 import {cn} from "@/lib/utils";
 import {usePathname} from "next/navigation";
 import {UserItem} from './user-item';
+import {Item} from "./item";
+import {useMutation} from "convex/react";
+import {api} from "@/convex/_generated/api"
+import {toast} from "sonner";
+
+
 
 export const Navigation = () => {
     const pathname = usePathname();
     const isMobile = useMediaQuery('(max-width: 768px)');
+    const create = useMutation(api.documents.create);
 
     const isResizingRef = useRef(false);
     const sidebarRef = useRef< ElementRef<'aside'>>(null);
@@ -86,15 +93,26 @@ export const Navigation = () => {
         }
     }
 
+    const handleCreate  = () => {
+        const promise = create ({ title: 'Untitled Document' });
+        toast.promise(promise, {
+            loading: 'Creating document...',
+            success: 'Document created!',
+            error: 'Failed to create document.'
+        })
+    }
+
 return (
     <>
         <aside ref={sidebarRef} className={cn("group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col z-[99999] pointer-events-auto", isResetting && "transition-all duration-300 ease-in-out", isMobile && "w-0 pointer-events-none")}>
-            <div onClick={collapse} role="button" className={cn("absolute top-2 right-2 h-6 w-6 text-muted-foreground rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-700 opacity-0 group-hover/sidebar:opacity-100 transition", isMobile && "opacity-100")}>
+            <div onClick={collapse} role="button" className={cn("absolute top-2" +
+                " right-2 h-6 w-6 text-muted-foreground rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-700 opacity-0 group-hover/sidebar:opacity-100 transition", isMobile && "opacity-100")}>
                   <ChevronsLeft className="h-6 w-6" /> {isMobile}
             </div>
 
             <div>
                 <UserItem />
+                <Item onClick={handleCreate} label='New page'  icon={PlusCircle}/>
             </div>
 
             <div className="mt-4">
