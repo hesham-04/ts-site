@@ -1,6 +1,6 @@
 'use client';
 
-import {ChevronsLeft, MenuIcon, PlusCircle} from "lucide-react";
+import {ChevronsLeft, MenuIcon, PlusCircle, Search, Settings} from "lucide-react";
 import React, {ElementRef, useEffect, useRef, useState} from "react";
 import {useMediaQuery} from "usehooks-ts";
 import {cn} from "@/lib/utils";
@@ -113,6 +113,8 @@ return (
             <div>
                 <UserItem />
                 <Item onClick={handleCreate} label='New page'  icon={PlusCircle}/>
+                <Item label='Search' icon={Search} isSearch onClick={() => {}} />
+                <Item label='Settings' icon={Settings}  onClick={() => {}} />
             </div>
 
             <div className="mt-4">
