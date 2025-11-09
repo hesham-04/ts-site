@@ -117,8 +117,6 @@ return (
                 <Item onClick={handleCreate} label='New page'  icon={PlusCircle}/>
                 <Item label='Search' icon={Search} isSearch onClick={() => {}} />
                 <Item label='Settings' icon={Settings}  onClick={() => {}} />
-
-
             </div>
 
             <div className="mt-4">
