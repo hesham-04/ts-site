@@ -16,7 +16,7 @@ interface DocumentListProps {
 }
 
 
-export const DocumentList = ({parentId, level=0 }:DocumentListProps) => {
+export const DocumentList = ({parentId, level=0, }:DocumentListProps) => {
     const params = useParams()
     const router = useRouter()
     const [expanded, setExpanded] = useState<Record<string, boolean>>({});
@@ -47,7 +47,7 @@ export const DocumentList = ({parentId, level=0 }:DocumentListProps) => {
 
     return (
         <>
-            <p style={{paddingLeft: level ? `${(level * 12) + 30}px` : '12px'}} className={cn('hidden text-sm  font-medium text-muted-foreground/80', expanded && 'last:block', level=== 0 && 'hidden')}>
+            <p style={{paddingLeft: level ? `${(level * 12) + 25}px` : '12px'}} className={cn('hidden text-sm  font-medium text-muted-foreground/80', expanded && 'last:block', level=== 0 && 'hidden')}>
                 No Pages inside
             </p>
             {documents.map((document) => {
@@ -60,8 +60,7 @@ export const DocumentList = ({parentId, level=0 }:DocumentListProps) => {
                             icon={FileIcon}
                             docmuentIcon={document.icon}
                             active={params.documentId === document._id}
-                            level={level}
-                            onExpand={() => onExpand(document._id)}
+                            level={level} onExpand={() => onExpand(document._id)}
                             expanded={expanded[document._id]}
                         />
 
