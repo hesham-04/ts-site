@@ -7,9 +7,11 @@ import {cn} from "@/lib/utils";
 import {usePathname} from "next/navigation";
 import {UserItem} from './user-item';
 import {Item} from "./item";
+import {DocumentList} from "./documents-list";
 import {useMutation} from "convex/react";
 import {api} from "@/convex/_generated/api"
 import {toast} from "sonner";
+
 
 
 
@@ -115,10 +117,12 @@ return (
                 <Item onClick={handleCreate} label='New page'  icon={PlusCircle}/>
                 <Item label='Search' icon={Search} isSearch onClick={() => {}} />
                 <Item label='Settings' icon={Settings}  onClick={() => {}} />
+
+
             </div>
 
             <div className="mt-4">
-                <p>Documents</p>
+                <DocumentList />
             </div>
             <div onMouseDown={handleMouseDown} onClick={restWidth} className="opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0" />
         </aside>
