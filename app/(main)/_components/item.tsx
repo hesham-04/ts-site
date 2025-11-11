@@ -11,6 +11,7 @@ import {useUser} from "@clerk/clerk-react";
 import {toast} from "sonner";
 import React from "react";
 import {DropdownMenu, DropdownMenuTrigger, DropdownMenuSeparator, DropdownMenuContent, DropdownMenuItem} from "@/components/ui/dropdown-menu";
+import {archiveDocument} from "@/convex/documents";
 
 interface ItemProps {
     id?: Id<'documents'>;
@@ -28,8 +29,22 @@ interface ItemProps {
 export const Item = ({id, active, docmuentIcon, isSearch, level=0, onExpand, expanded, label, onClick, icon:Icon}:ItemProps) => {
     const ChevronIcon = expanded ? ChevronDown :ChevronRight
     const create = useMutation(api.documents.create);
+    const archive = useMutation(api.documents.archiveDocument);
     const {user} = useUser();
     const router = useRouter();
+
+    const onArchive = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        e.stopPropagation()
+        if (!id) return;
+        const promise = archive({documentId: id})
+
+        toast.promise(promise, {
+            loading: 'Archiving document...',
+            success: 'Document archived',
+            error: 'Failed to archive document',
+        })
+        }
+
 
     const handleExpand = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation();
@@ -52,7 +67,7 @@ export const Item = ({id, active, docmuentIcon, isSearch, level=0, onExpand, exp
         });
     }
     return (
-        <div onClick={onClick} role='button' style={{paddingLeft: level ? `${(level * 12) + 12}px` : '12px'}} className={cn('group min-h-[27px] text-sm py-1  pr-3 w-full hover:bg-primary/5 flex items-center text-muted-foreground font-medium', active && 'bg-primary/5 text-primary')}>
+        <div onClick={onClick} role='button' style={{paddingLeft: level ? `${(level * 12) + 12}px` : '12px'}} className={cn('group min-h-[27px] text-sm py-1  pr-3 w-full hover:bg-primary/5 flex items-center text-muted-foreground font-medium cursor-pointer', active && 'bg-primary/5 text-primary')}>
             {!!id && (
                 <div role='button' className='h-full rounded-sm hover:bg-neutral-300 dark:bg-neutral-600 mr-1' onClick={handleExpand}>
                     <ChevronIcon className='h-4 w-4 shrink-0 text-muted-foreground/50'/>
@@ -85,7 +100,7 @@ export const Item = ({id, active, docmuentIcon, isSearch, level=0, onExpand, exp
                             </div>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className='w-60' align='start' side='right' forceMount>
-                            <DropdownMenuItem onClick={() => {}}>
+                            <DropdownMenuItem onClick={onArchive}>
                                 <TrashIcon className='h-4 w-4 mr-2 text-red-500'/> Delete
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />

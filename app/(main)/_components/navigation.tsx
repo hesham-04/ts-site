@@ -1,6 +1,6 @@
 'use client';
 
-import {ChevronsLeft, MenuIcon, PlusCircle, Search, Settings} from "lucide-react";
+import {ChevronsLeft, MenuIcon, PlusCircle, Search, Settings, Trash} from "lucide-react";
 import React, {ElementRef, useEffect, useRef, useState} from "react";
 import {useMediaQuery} from "usehooks-ts";
 import {cn} from "@/lib/utils";
@@ -11,6 +11,7 @@ import {DocumentList} from "./documents-list";
 import {useMutation} from "convex/react";
 import {api} from "@/convex/_generated/api"
 import {toast} from "sonner";
+import {Popover, PopoverTrigger, PopoverContent} from "@/components/ui/popover";
 
 
 
@@ -121,6 +122,15 @@ return (
 
             <div className="mt-4">
                 <DocumentList />
+                <Item onClick={handleCreate} label='Add a page' icon={PlusCircle} />
+                <Popover>
+                    <PopoverTrigger className='w-full mt-4'>
+                        <Item label='Trash' icon={Trash} />
+                    </PopoverTrigger>
+                    <PopoverContent side={isMobile ? 'top' : 'right'} align="start" className='w-72 p-0'>
+                        <p>Bin</p>
+                    </PopoverContent>
+                </Popover>
             </div>
             <div onMouseDown={handleMouseDown} onClick={restWidth} className="opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0" />
         </aside>

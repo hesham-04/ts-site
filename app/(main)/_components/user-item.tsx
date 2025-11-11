@@ -20,7 +20,8 @@ export const UserItem = () => {
                         </Avatar>
                         <span className='text-start font-medium line-clamp-1'>{user?.fullName}&apos; Trojan</span>
                     </div>
-                    <ChevronsLeftRight className='rotate-90 ml-2 text-muted-foreground h-4 w-4'/>
+                    {/*This just looks ugly to me idk*/}
+                    {/*<ChevronsLeftRight className='rotate-90 ml-2 text-muted-foreground h-4 w-4'/>*/}
                 </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent className='w-80' align='start' alignOffset={11}>
