@@ -181,3 +181,42 @@ export const create = mutation({
         });
     }
 });
+
+
+export const deleteDocument = mutation({
+    args: {documentId: v.id('documents')}, handler:async (ctx, args) => {
+        const identity = await ctx.auth.getUserIdentity();
+        if (!identity) {
+            throw new Error("Not authenticated");
+        }
+        const userId = identity.subject;
+        const document = await ctx.db.get(args.documentId);
+
+        if (!document) {
+            throw new Error("Document not found");
+        }
+
+        if (document.userId !== userId) {
+            throw new Error("Not authorized to delete this document");
+        }
+
+        const deleteChildDocuments = async (documentId: Id<'documents'>) => {
+            const childDocuments = await ctx.db
+                .query("documents")
+                .withIndex("by_user_parent", q => q
+                    .eq("userId", userId)
+                    .eq("parentDocumentId", documentId))
+                .collect();
+
+            for (const childDocument of childDocuments) {
+                await ctx.db.delete(childDocument._id);
+                // this is to check if the child document has its own children, which also need to be deleted
+                await deleteChildDocuments(childDocument._id);
+            }
+        }
+
+        await deleteChildDocuments(args.documentId);
+
+        await ctx.db.delete(args.documentId);
+    }
+});

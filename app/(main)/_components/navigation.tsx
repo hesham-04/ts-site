@@ -12,9 +12,7 @@ import {useMutation} from "convex/react";
 import {api} from "@/convex/_generated/api"
 import {toast} from "sonner";
 import {Popover, PopoverTrigger, PopoverContent} from "@/components/ui/popover";
-
-
-
+import {TrashBox} from "./trash-box";
 
 export const Navigation = () => {
     const pathname = usePathname();
@@ -128,7 +126,7 @@ return (
                         <Item label='Trash' icon={Trash} />
                     </PopoverTrigger>
                     <PopoverContent side={isMobile ? 'top' : 'right'} align="start" className='w-72 p-0'>
-                        <p>Bin</p>
+                        <TrashBox />
                     </PopoverContent>
                 </Popover>
             </div>
