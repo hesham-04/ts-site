@@ -56,6 +56,7 @@ export const TrashBox = () => {
         return (
             <div className='h-full flex items-center justify-center p-6 m-4'>
                 <Spinner size='lg' />
+                <p>Loading Documents...</p>
             </div>
         );
     }
