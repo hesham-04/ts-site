@@ -11,6 +11,7 @@ import {toast} from "sonner";
 import {Spinner} from "@/components/spinner";
 import {Input} from "@/components/ui/input";
 import {Search, Trash, Undo} from "lucide-react";
+import {ConfirmModal} from "@/app/(main)/_components/modals/confirm";
 
 export const TrashBox = () => {
     const router = useRouter();
@@ -55,8 +56,7 @@ export const TrashBox = () => {
     if (!documents) {
         return (
             <div className='h-full flex items-center justify-center p-6 m-4'>
-                <Spinner size='lg' />
-                <p>Loading Documents...</p>
+                <Spinner size='md' />
             </div>
         );
     }
@@ -79,9 +79,17 @@ export const TrashBox = () => {
                                 <Undo className="h-4 w-4 text-muted-foreground" />
                             </div>
 
-                            <div onClick={(e) => {e.stopPropagation(); onDelete(document._id);}} role="button" className="p-2 rounded-sm hover:bg-neutral-200 dark:hover:bg-neutral-700">
-                                <Trash className="h-4 w-4 text-muted-foreground" />
-                            </div>
+                            <ConfirmModal onConfirm={() => onDelete(document._id)}>
+                                <div
+                                    onClick={(e) => e.stopPropagation()}
+                                    role="button"
+                                    className="p-2 rounded-sm hover:bg-neutral-200 dark:hover:bg-neutral-700"
+                                >
+                                    <Trash className="h-4 w-4 text-muted-foreground" />
+                                </div>
+                            </ConfirmModal>
+
+
                         </div>
                     </div>
 
