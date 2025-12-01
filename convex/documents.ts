@@ -220,3 +220,5 @@ export const deleteDocument = mutation({
         await ctx.db.delete(args.documentId);
     }
 });
+
+
